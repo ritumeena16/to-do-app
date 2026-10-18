@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart To-Do App</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="todo-container">
+
+        <header class="app-header">
+            <p class="app-label">MY PRODUCTIVITY</p>
+            <h1>Smart To-Do</h1>
+            <p class="subtitle">Small steps, big progress.</p>
+        </header>
+
+        <section class="task-form">
+            <input
+                type="text"
+                id="task-input"
+                placeholder="What do you need to do?"
+                autocomplete="off"
+            >
+
+            <button id="add-task-btn">+ Add Task</button>
+        </section>
+
+        <section class="task-summary">
+            <div class="summary-card">
+                <span class="summary-number" id="total-count">0</span>
+                <span class="summary-label">Total Tasks</span>
+            </div>
+
+            <div class="summary-card">
+                <span class="summary-number" id="pending-count">0</span>
+                <span class="summary-label">Pending</span>
+            </div>
+
+            <div class="summary-card">
+                <span class="summary-number" id="completed-count">0</span>
+                <span class="summary-label">Completed</span>
+            </div>
+        </section>
+
+        <section class="tasks-section">
+
+            <div class="section-heading">
+                <h2>My Tasks</h2>
+                <span class="task-date">Stay focused ✨</span>
+            </div>
+
+            <nav class="task-filters" aria-label="Filter tasks">
+                <button class="filter-btn active" data-filter="all">
+                    All
+                </button>
+
+                <button class="filter-btn" data-filter="pending">
+                    Pending
+                </button>
+
+                <button class="filter-btn" data-filter="completed">
+                    Completed
+                </button>
+            </nav>
+
+            <ul id="task-list" class="task-list">
+                <!-- JavaScript se task items yahan add honge -->
+            </ul>
+
+            <div id="empty-state" class="empty-state">
+                <div class="empty-icon">📝</div>
+                <h3>No tasks yet</h3>
+                <p>Add your first task and get started!</p>
+            </div>
+
+        </section>
+
+        <footer class="app-footer">
+            Made with focus & patience 💜
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
