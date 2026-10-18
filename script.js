@@ -84,7 +84,6 @@ applyFilter(filterType);
 filterButtons();
 
 function updateEmptyState(){
-//avaScript mein kisi element ke andar kitne child elements hain, ye check karne ke liye .children.length use kar sakte hain.
  if(taskList.children.length === 0){
  emptyState.style.display = "block";
  }
