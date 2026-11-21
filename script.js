@@ -8,6 +8,7 @@ let completed = document.querySelector("#completed-count");
 let filterBtns = document.querySelectorAll(".filter-btn");
 
 let currentFilter = "all";
+
 function applyFilter(currentFilter){
 
 for(let i=0; i<taskList.children.length; i++){
@@ -37,8 +38,10 @@ else{
    currentTask.style.display="none";
 }
 }
-
 }
+
+updateEmptyState();
+
 }
 
 function saveTasks(){
@@ -84,12 +87,44 @@ applyFilter(filterType);
 filterButtons();
 
 function updateEmptyState(){
- if(taskList.children.length === 0){
- emptyState.style.display = "block";
- }
- else{
- emptyState.style.display = "none";
- }
+
+   let visibleCounts = 0;
+
+   for(let i=0; i<taskList.children.length; i++){
+      let currentTasks = taskList.children[i];
+
+      if(currentTasks.style.display !== "none"){
+         visibleCounts++;
+      }
+   }
+
+   let h3 = emptyState.querySelector("h3");
+    let p = emptyState.querySelector("p");
+
+   if(visibleCounts === 0){
+
+      emptyState.style.display = "block";
+
+      if(taskList.children.length === 0){
+          h3.textContent = "No tasks yet";
+          p.textContent = "Add your first task and get started!";
+      }
+      else if(searchInput.value.trim() !== ""){
+         h3.textContent = "No matching tasks found";
+      }
+      else if(currentFilter === "pending"){
+         h3.textContent = "No pending tasks"
+      }
+      else if(currentFilter === "completed"){
+        h3.textContent = "No completed tasks"
+      }
+      else{
+         h3.textContent = "No tasks to show";
+      }
+   }
+   else{
+      emptyState.style.display = "none";
+   }
 }
 
 function updateCounts(){
@@ -268,3 +303,51 @@ addBtn.addEventListener("click", function(){
  taskInput.value="";
 
 });
+
+ taskInput.addEventListener("keydown", function(e){
+ let task = taskInput.value.trim();
+
+ if(e.key === "Enter")
+ {
+ if(task===""){
+ return;
+ }
+ 
+  else{
+   createTask(task);
+  }
+
+  updateEmptyState();
+  updateCounts();
+  taskInput.value="";
+ }
+
+});
+
+const searchInput = document.querySelector("#search-input");
+
+searchInput.addEventListener("input", function(e){
+
+ 
+    let searchText = searchInput.value.trim().toLowerCase();
+
+    for(let i=0; i<taskList.children.length; i++){
+      
+      let currentTask = taskList.children[i];
+
+      let currentCheckedBox = currentTask.querySelector("input");
+
+      let taskText = currentTask.querySelector(".task-text").textContent.toLowerCase();
+
+      if((currentFilter === "pending" && currentCheckedBox.checked === false && taskText.includes(searchText))
+         ||(currentFilter === "completed" && currentCheckedBox.checked === true && taskText.includes(searchText))
+         ||(currentFilter === "all" && taskText.includes(searchText))){
+         currentTask.style.display = "";
+      }
+      else{
+         currentTask.style.display = "none";
+      }
+    }
+    updateEmptyState();
+
+});   
