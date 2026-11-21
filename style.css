@@ -82,10 +82,47 @@ input:focus-visible {
     line-height: 1.7;
 }
 
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-direction: column;
+}
+
+
+#search-input {
+    flex: 1;
+    min-width: 0;
+    padding: 15px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 11px;
+    outline: none;
+    background: var(--input-color);
+    color: var(--text-color);
+    font-size: 13px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#search-input::placeholder {
+    color: #747b91;
+}
+
+#search-input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(155, 135, 245, 0.1);
+}
+
 .task-form {
     display: flex;
     gap: 10px;
     margin-bottom: 25px;
+    flex-direction: column;
+}
+
+.Add-section{
+display: flex;
+gap: 10px;
+margin-bottom: 25px;
 }
 
 #task-input {
